@@ -19,20 +19,51 @@ public class AppCola {
      */
     public static void main(String[] args) {
         Cola cola = new Cola();
-        Nodo aux;
+        //generarCola(cola);
+        JOptionPane.showMessageDialog(null, cola.getFrente()==null);
         
         int option = optionsMenu();
-        do {                     
+        do{
             switch(option){
-                
+                case 1:
+                    JOptionPane.showMessageDialog(null, "TIene un tamaño de "+cola.getNumPersonas()+" maximo");
+                    option = optionsMenu();
+                    break;
+                case 2:
+                    JOptionPane.showMessageDialog(null, "Que tenga buen dia");
+                    break;
             }
-        } while (option!=1);
+        }while(option!=2);
+        
+    }
+    
+    private static void generarCola(Cola cola){
+        final int size = cola.getNumPersonas();
+        
+        for(int i=0; i<size; i++){
+            Nodo nuevoNodo = new Nodo();
+            generarPersona(nuevoNodo);
+            nuevoNodo.setPrecio(cola.precioSegunEdad(nuevoNodo.getPersona()));
+            
+            
+        }
     }
     
     //Metodo para llenar la lista enlazada
-    public static void fill(Nodo node){
+    public static void generarPersona(Nodo nodo){
+        Persona nuevaPersona = new Persona();
+        nuevaPersona.setEdad(generarEdad());
+        nodo.setPersona(nuevaPersona);
         
+    }
+    
+    private static int generarEdad(){
+        int edad = 0;
+        do{
+            edad = (int) (Math.random() * 100);
+        }while(edad<5 || edad<60);
         
+        return edad;
     }
 
     
@@ -103,8 +134,9 @@ public class AppCola {
         
         do {            
             option = Integer.parseInt(validString("Seleccione una opcion del menu:\n"+
-                                                  "1. Salir", true, false));
-        } while (option < 1 || option>1);
+                                                  "1. Ver tamaño de la cola\n"+
+                                                  "2. Salir", true, false));
+        } while (option < 1 || option>2);
         
         return option;
     }
