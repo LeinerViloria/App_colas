@@ -59,14 +59,7 @@ public class AppCola {
             generarPersona(nuevoNodo);
             nuevoNodo.setPrecio(cola.precioSegunEdad(nuevoNodo.getPersona()));
             
-            if(cola.getFrente()==null){
-                cola.setFrente(nuevoNodo);
-                cola.setNodoFinal(nuevoNodo);
-            }else{
-                Nodo temp = cola.getNodoFinal();
-                temp.setSiguiente(nuevoNodo);
-                cola.setNodoFinal(nuevoNodo);
-            }
+            cola.agregar(nuevoNodo);
             
             
         }

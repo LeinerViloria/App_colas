@@ -96,6 +96,19 @@ public class Cola {
         this.nodoFinal = nodoFinal;
     }
     
+    public void agregar(Nodo nuevoNodo){
+        
+        if(getFrente()==null){
+            this.setFrente(nuevoNodo);
+            this.setNodoFinal(nuevoNodo);
+        }else{
+            Nodo temp = getNodoFinal();
+            temp.setSiguiente(nuevoNodo);
+            this.setNodoFinal(nuevoNodo);
+        }
+        
+    }
+    
     public void showAll(){
         Nodo temp = this.frente;
         int orden = 1;
