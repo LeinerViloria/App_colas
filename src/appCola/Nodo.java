@@ -41,5 +41,4 @@ public class Nodo {
         this.siguiente = siguiente;
     }
     
-    
 }

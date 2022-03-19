@@ -5,13 +5,15 @@
  */
 package appCola;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author leine
  */
 public class Cola {
     private final int numPersonas;
-    private int precios[];
+    private final int precios[];
     private Nodo frente;
     private Nodo nodoFinal;
 
@@ -65,6 +67,18 @@ public class Cola {
         
         return precio;
     }
+    
+    public int getSize(){
+        Nodo temp = this.frente;
+        int size = 0;
+        
+        while(temp!=null){
+            size++;
+            temp = temp.getSiguiente();
+        }
+        
+        return 0;
+    }
 
     public Nodo getFrente() {
         return frente;
@@ -82,7 +96,19 @@ public class Cola {
         this.nodoFinal = nodoFinal;
     }
     
-    
+    public void showAll(){
+        Nodo temp = this.frente;
+        int orden = 1;
+        while(temp != null){
+            String mensaje = "#"+orden+") Esta persona tiene "+temp.getPersona().getEdad()+" años, su entrada vale "+temp.getPrecio();
+            
+            JOptionPane.showMessageDialog(null, mensaje);
+            
+            temp = temp.getSiguiente();
+            orden++;
+        }
+        
+    }
     
     
 }

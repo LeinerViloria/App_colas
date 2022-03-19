@@ -13,14 +13,24 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * @author leine
  */
 public class AppCola {
+    private static final String[] opciones = {"Ver tamaño de la cola", "Ver informacion", "Salir"};
+    private static String mensaje = "Seleccione una opcion del menu:";
+    
+    private static void cargarMensaje(){
+        int numeroOpcion = 1;
+        for (String opcion : AppCola.opciones) {
+            AppCola.mensaje += "\n"+numeroOpcion+". "+opcion;
+            numeroOpcion++;
+        }
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        cargarMensaje();
         Cola cola = new Cola();
-        //generarCola(cola);
-        JOptionPane.showMessageDialog(null, cola.getFrente()==null);
+        generarCola(cola);
         
         int option = optionsMenu();
         do{
@@ -30,10 +40,14 @@ public class AppCola {
                     option = optionsMenu();
                     break;
                 case 2:
+                    cola.showAll();
+                    option = optionsMenu();
+                    break;
+                case 3:
                     JOptionPane.showMessageDialog(null, "Que tenga buen dia");
                     break;
             }
-        }while(option!=2);
+        }while(option!=AppCola.opciones.length);
         
     }
     
@@ -44,6 +58,15 @@ public class AppCola {
             Nodo nuevoNodo = new Nodo();
             generarPersona(nuevoNodo);
             nuevoNodo.setPrecio(cola.precioSegunEdad(nuevoNodo.getPersona()));
+            
+            if(cola.getFrente()==null){
+                cola.setFrente(nuevoNodo);
+                cola.setNodoFinal(nuevoNodo);
+            }else{
+                Nodo temp = cola.getNodoFinal();
+                temp.setSiguiente(nuevoNodo);
+                cola.setNodoFinal(nuevoNodo);
+            }
             
             
         }
@@ -59,9 +82,11 @@ public class AppCola {
     
     private static int generarEdad(){
         int edad = 0;
+        boolean flag = false;
         do{
             edad = (int) (Math.random() * 100);
-        }while(edad<5 || edad<60);
+            if(edad>=5 && edad<=60) flag=true;
+        }while(!flag);
         
         return edad;
     }
@@ -119,24 +144,13 @@ public class AppCola {
        return true;
    }
     
-    public static void show(Nodo node){
-        
-    }
-    
-    //Metodo para listar uno a uno los nodos de la lista
-    public static void nodeList(Nodo node){
-        Nodo temp = node;
-        //while (temp != null) { show(temp); temp = temp.getNext(); }   
-    }
-    
     public static int optionsMenu(){
         int option = 0;
         
+        
         do {            
-            option = Integer.parseInt(validString("Seleccione una opcion del menu:\n"+
-                                                  "1. Ver tamaño de la cola\n"+
-                                                  "2. Salir", true, false));
-        } while (option < 1 || option>2);
+            option = Integer.parseInt(validString(AppCola.mensaje, true, false));
+        } while (option < 1 || option>AppCola.opciones.length);
         
         return option;
     }
