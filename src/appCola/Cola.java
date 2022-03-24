@@ -5,7 +5,10 @@
  */
 package appCola;
 
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
@@ -126,7 +129,14 @@ public class Cola {
             temp = temp.getSiguiente();
             orden++;
         }
-        System.out.println(mensaje);
+       
+        JTextArea textArea = new JTextArea(mensaje);
+JScrollPane scrollPane = new JScrollPane(textArea);  
+textArea.setLineWrap(true);  
+textArea.setWrapStyleWord(true); 
+scrollPane.setPreferredSize( new Dimension( 500, 500 ) );
+JOptionPane.showMessageDialog(null, scrollPane, "Personas que entraron al Cine",  
+                                       JOptionPane.YES_NO_OPTION);
     }
     
      public void showTotal(){
