@@ -6,6 +6,7 @@
 package appCola;
 
 import javax.swing.JOptionPane;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Cola {
         this.numPersonas = this.generateSize();
         this.precios = new int[4];
         this.generarPrecios();
+        
     }
     
     private int generateSize(){
@@ -112,20 +114,34 @@ public class Cola {
         }
         
     }
+
     
     public void showAll(){
         Nodo temp = this.frente;
         int orden = 1;
+        String mensaje = "";
         while(temp != null){
-            String mensaje = "#"+orden+") Esta persona tiene "+temp.getPersona().getEdad()+" años, su entrada vale "+temp.getPrecio();
-            
-            JOptionPane.showMessageDialog(null, mensaje);
+            mensaje += "#"+orden+") Esta persona tiene "+temp.getPersona().getEdad()+" años, su entrada vale "+temp.getPrecio()+"\n";
             
             temp = temp.getSiguiente();
             orden++;
         }
-        
+        System.out.println(mensaje);
     }
     
-    
-}
+     public void showTotal(){
+        Nodo temp = this.frente;
+        int orden = 1;
+        int recaudacion=0;
+        while(temp != null){
+           
+            recaudacion+=temp.getPrecio();
+            temp = temp.getSiguiente();
+            orden++;
+        }
+        JOptionPane.showMessageDialog(null, "La recaudacion total fue de: "+recaudacion);
+    }
+
+    }
+
+

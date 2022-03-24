@@ -13,7 +13,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * @author leine
  */
 public class AppCola {
-    private static final String[] opciones = {"Ver tamaño de la cola", "Ver informacion", "Salir"};
+    private static final String[] opciones = {"Ver tamaño de la cola", "Ver informacion", "Mostrar recaudacion", "Salir"};
     private static String mensaje = "Seleccione una opcion del menu:";
     
     private static void cargarMensaje(){
@@ -43,11 +43,15 @@ public class AppCola {
                     cola.showAll();
                     option = optionsMenu();
                     break;
-                case 3:
-                    JOptionPane.showMessageDialog(null, "Que tenga buen dia");
-                    break;
+                 case 3:
+                    cola.showTotal();
+                    option = optionsMenu();
+                    break;    
+              
             }
         }while(option!=AppCola.opciones.length);
+        
+        JOptionPane.showMessageDialog(null, "Que tenga buen dia");
         
     }
     
