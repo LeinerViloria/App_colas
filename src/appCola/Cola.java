@@ -98,13 +98,17 @@ public class Cola {
     
     public void agregar(Nodo nuevoNodo){
         
-        if(getFrente()==null){
-            this.setFrente(nuevoNodo);
-            this.setNodoFinal(nuevoNodo);
+        if(this.getSize()<this.numPersonas){
+            if(getFrente()==null){
+                this.setFrente(nuevoNodo);
+                this.setNodoFinal(nuevoNodo);
+            }else{
+                Nodo temp = getNodoFinal();
+                temp.setSiguiente(nuevoNodo);
+                this.setNodoFinal(nuevoNodo);
+            }
         }else{
-            Nodo temp = getNodoFinal();
-            temp.setSiguiente(nuevoNodo);
-            this.setNodoFinal(nuevoNodo);
+            JOptionPane.showMessageDialog(null, "La cola está llena.");
         }
         
     }
